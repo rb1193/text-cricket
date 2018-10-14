@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using Newtonsoft.Json;
+using Models;
 using Repositories;
 using Services;
 
@@ -11,15 +13,19 @@ namespace Controllers
 
         private ConsoleHandler _console;
 
-        public BallController(BallRepository repo, ConsoleHandler console)
-        {
+        private JsonSerializer _serializer;
+
+        public BallController(
+            BallRepository repo, ConsoleHandler console, JsonSerializer serializer
+        ) {
             _repo = repo;
             _console = console;
+            _serializer = serializer;
         }
 
         public void Play()
         {
-            var ball = _repo.Ball;
+            Ball ball = JsonConvert.DeserializeObject<Ball>(_repo.Ball);
 
             _console.Write(ball.Prompt);
             var key = _console.Read();

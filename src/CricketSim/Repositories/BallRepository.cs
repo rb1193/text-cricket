@@ -1,5 +1,5 @@
 using System;
-using Newtonsoft.Json;
+using System.IO;
 using Models;
 using Services;
 
@@ -7,23 +7,20 @@ namespace Repositories
 {
     public class BallRepository
     {
-        private JsonSerializer _serializer;
-
         private FileHandler _fileHandler;
 
         private string filePath = "locale/en_EN/ball.json";
 
-        public Ball Ball {
+        public string Ball {
             get {
-                using (var json = _fileHandler.Open(filePath)) {
-                    return (Ball)_serializer.Deserialize(json, typeof(Ball));
+                using (StreamReader stream = _fileHandler.Open(filePath)) {
+                    return stream.ReadToEnd();
                 }
             }
         }
 
-        public BallRepository(JsonSerializer serializer, FileHandler fileHandler)
+        public BallRepository(FileHandler fileHandler)
         {
-            _serializer = serializer;
             _fileHandler = fileHandler;
         }
     }

@@ -1,32 +1,32 @@
 using System;
 using System.IO;
-using Newtonsoft.Json;
-using Models;
+using Repositories;
+using Services;
 
 namespace Controllers
 {
     public class BallController
     {
-        private StreamReader ballConfig = File.OpenText("locale/en_EN/ball.json");
-        private Ball ball;
-        private JsonSerializer serializer = new JsonSerializer();
+        private BallRepository _repo;
 
-        public string LoadBall()
+        private ConsoleHandler _console;
+
+        public BallController(BallRepository repo, ConsoleHandler console)
         {
-            using (ballConfig) {
-                ball = (Ball)serializer.Deserialize(ballConfig, typeof(Ball));
-            }
-            return ball.Prompt;
+            _repo = repo;
+            _console = console;
         }
 
-        public string PlayBall()
+        public void Play()
         {
-            var key = Console.ReadKey(true);
+            var ball = _repo.Ball;
+
+            _console.Write(ball.Prompt);
+            var key = _console.Read();
             if (key.KeyChar == ' ') 
             {
-                return ball.Result;
+                _console.Write(ball.Result);
             }
-            return null;
         }
     }
 }

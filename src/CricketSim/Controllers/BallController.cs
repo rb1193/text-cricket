@@ -1,37 +1,34 @@
 using System;
 using System.IO;
 using Newtonsoft.Json;
-using Models;
-using Repositories;
+using Models.Entities;
+using Factories;
 using Services;
 
 namespace Controllers
 {
     public class BallController
     {
-        private BallRepository _repo;
+        private BallFactory _factory;
 
         private ConsoleHandler _console;
 
-        private JsonSerializer _serializer;
-
         public BallController(
-            BallRepository repo, ConsoleHandler console, JsonSerializer serializer
+            BallFactory factory, ConsoleHandler console
         ) {
-            _repo = repo;
+            _factory = factory;
             _console = console;
-            _serializer = serializer;
         }
 
         public void Play()
         {
-            Ball ball = JsonConvert.DeserializeObject<Ball>(_repo.Ball);
+            var ball = _factory.GetBall();
 
-            _console.Write(ball.Prompt);
+            _console.Write(ball.ToString());
             var key = _console.Read();
             if (key.KeyChar == ' ') 
             {
-                _console.Write(ball.Result);
+                _console.Write("Smash");
             }
         }
     }

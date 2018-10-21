@@ -2,7 +2,7 @@ using System;
 
 namespace Services
 {
-    public class RandomNumberGenerator
+    public class RandomNumberGenerator : IRandomNumberGenerator
     {
         private Random _r;
         public RandomNumberGenerator() {

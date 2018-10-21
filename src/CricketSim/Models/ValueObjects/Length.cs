@@ -1,28 +1,26 @@
 using System;
+using System.Collections.Generic;
 using Exceptions;
+using Utils;
 
 namespace Models.ValueObjects
 {
-    public struct Length
+    public class Length : Base
     {
-        public int Value { get; private set; }
-
-        public Length(int i) {
-            Value = i;
-        }
+        public Length(ITextUtils t, int i):base(t, i) {}
 
         public override string ToString() {
             switch (Value)
             {
                 case 1:
-                    return "short length";
+                    return _t._T("ball.length.short");
                 case 2:
-                    return "good length";
+                    return  _t._T("ball.length.good");
                 case 3:
-                    return "full length";
+                    return _t._T("ball.length.full");
                 default:
-                    throw new ValueNotFoundException("The value " + Value + " does not" +
-                        " have a corresponding length");
+                    string error = _t._T("error.value_not_found", new object[Value]);
+                    throw new ValueNotFoundException(error);
             }
         }
     }

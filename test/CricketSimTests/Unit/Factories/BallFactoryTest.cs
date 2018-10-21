@@ -2,6 +2,9 @@ using System;
 using Xunit;
 using Factories;
 using Models.Entities;
+using Services;
+using Utils;
+using Moq;
 
 namespace CricketSimTests
 {
@@ -11,7 +14,8 @@ namespace CricketSimTests
 
         public BallFactory_GetBallShould()
         {
-            _factory = new BallFactory(new Services.RandomNumberGenerator());
+            var t = new Mock<ITextUtils>();
+            _factory = new BallFactory(new RandomNumberGenerator(), t.Object);
         }
         
         [Fact]

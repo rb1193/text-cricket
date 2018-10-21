@@ -1,16 +1,20 @@
 using System;
 using Services;
-using SimpleInjector;
 
 namespace Utils
 {
-    public static class TextUtils
+    public class TextUtils : ITextUtils
     {
-        public static string _T(string key)
+        private IResourceHandler _rh;
+
+        public TextUtils(IResourceHandler rh)
         {
-            var container = new Container();
-            ResourceManager rm = container.GetInstance<ResourceManager>();
-            return rm.Get(key);
+            _rh = rh;
+        }
+        
+        public string _T(string key, object[] replace = null)
+        {
+            return String.Format(_rh.Get(key), replace);
         }
     }
 }

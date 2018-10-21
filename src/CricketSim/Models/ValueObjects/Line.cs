@@ -4,26 +4,22 @@ using Utils;
 
 namespace Models.ValueObjects
 {
-    public struct Line
+    public class Line : Base
     {
-        public int Value { get; private set; }
-
-        public Line(int i) {
-            Value = i;
-        }
+        public Line(ITextUtils t, int i):base(t, i) {}
 
         public override string ToString() {
             switch (Value)
             {
                 case 1:
-                    return TextUtils._T("ball.line.outsideOff");
+                    return _t._T("ball.line.outsideOff");
                 case 2:
-                    return  TextUtils._T("ball.line.off");
+                    return  _t._T("ball.line.off");
                 case 3:
-                    return TextUtils._T("ball.line.leg");
+                    return _t._T("ball.line.leg");
                 default:
-                    throw new ValueNotFoundException("The value " + Value + " does not" +
-                        " have a corresponding line");
+                    string error = _t._T("error.value_not_found", new object[Value]);
+                    throw new ValueNotFoundException(error);
             }
         }
     }

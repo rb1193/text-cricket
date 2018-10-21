@@ -16,10 +16,11 @@ namespace CricketSim
         static Program() {
             container = new Container();
 
-            container.Register<ConsoleHandler>(Lifestyle.Singleton);
-            container.Register<FileHandler>(Lifestyle.Singleton);
+            container.Register<IConsoleHandler, ConsoleHandler>(Lifestyle.Singleton);
+            container.Register<IFileHandler, FileHandler>(Lifestyle.Singleton);
             container.Register<JsonSerializer>(Lifestyle.Singleton);
-            container.Register<RandomNumberGenerator>(Lifestyle.Singleton);
+            container.Register<IResourceHandler, ResourceHandler>(Lifestyle.Singleton);
+            container.Register<IRandomNumberGenerator, RandomNumberGenerator>(Lifestyle.Singleton);
             container.Register<BallFactory>(Lifestyle.Singleton);
             container.Register<BallController>(Lifestyle.Singleton);
 

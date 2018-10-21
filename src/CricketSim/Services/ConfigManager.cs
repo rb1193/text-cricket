@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 
 namespace Services
 {
-    public class ConfigManager
+    public class ConfigManager : IConfigManager
     {
         private NameValueCollection _config;
         

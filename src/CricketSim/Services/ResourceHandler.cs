@@ -6,13 +6,17 @@ using Services;
 
 namespace Services
 {
-    public class ResourceManager
+    public class ResourceHandler : IResourceHandler
     {
-        private FileHandler _fileHandler;
+        private IFileHandler _fileHandler;
 
         private JsonSerializer _serializer;
 
-        public ResourceManager(FileHandler fileHandler, JsonSerializer serializer)
+        public string Locale { get; set; }
+
+        public string Root { get; set; }
+
+        public ResourceHandler(IFileHandler fileHandler, JsonSerializer serializer)
         {
             _fileHandler = fileHandler;
             _serializer = serializer;
@@ -20,7 +24,9 @@ namespace Services
         
         public string Get(string key)
         {
-            StreamReader reader = _fileHandler.Open("./Resources/en_EN/Text.json");
+            var fileName = key.Split(".")[0];
+            StreamReader reader = _fileHandler.Open("./" + Root + "/" + Locale +
+                "/" + fileName + ".json");
             string json = reader.ReadToEnd();
             Dictionary<string, string> resource = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
             return resource[key];

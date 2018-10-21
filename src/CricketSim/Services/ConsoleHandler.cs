@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Services
 {
-    public class ConsoleHandler
+    public class ConsoleHandler : IConsoleHandler
     {
         public ConsoleKeyInfo Read()
         {

@@ -8,21 +8,21 @@ namespace CricketSimTests
     public class Line_ToStringShould
     {        
         [Fact]
-        public void ReturnShort_GivenValue1()
+        public void ReturnOutsideOffStump_GivenValue1()
         {
             var line = new Line(1);
             Assert.True(line.ToString() == "outside off stump");
         }
 
         [Fact]
-        public void ReturnGood_GivenValue2()
+        public void ReturnOnOffStump_GivenValue2()
         {
             var line = new Line(2);
             Assert.True(line.ToString() == "on off stump");
         }
 
         [Fact]
-        public void ReturnFull_GivenValue3()
+        public void ReturnOnLegStump_GivenValue3()
         {
             var line = new Line(3);
             Assert.True(line.ToString() == "on leg stump");

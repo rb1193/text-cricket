@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Resources;
 using SimpleInjector;
 using Newtonsoft.Json;
 using Controllers;
@@ -16,6 +17,8 @@ namespace CricketSim
             container = new Container();
 
             container.Register<ConsoleHandler>(Lifestyle.Singleton);
+            container.Register<FileHandler>(Lifestyle.Singleton);
+            container.Register<JsonSerializer>(Lifestyle.Singleton);
             container.Register<RandomNumberGenerator>(Lifestyle.Singleton);
             container.Register<BallFactory>(Lifestyle.Singleton);
             container.Register<BallController>(Lifestyle.Singleton);

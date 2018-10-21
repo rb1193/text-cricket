@@ -1,5 +1,6 @@
 using System;
 using Exceptions;
+using Utils;
 
 namespace Models.ValueObjects
 {
@@ -15,11 +16,11 @@ namespace Models.ValueObjects
             switch (Value)
             {
                 case 1:
-                    return "outside off stump";
+                    return TextUtils._T("ball.line.outsideOff");
                 case 2:
-                    return "on off stump";
+                    return  TextUtils._T("ball.line.off");
                 case 3:
-                    return "on leg stump";
+                    return TextUtils._T("ball.line.leg");
                 default:
                     throw new ValueNotFoundException("The value " + Value + " does not" +
                         " have a corresponding line");

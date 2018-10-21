@@ -1,0 +1,3 @@
+ball.line.outsideOff = outside off stump
+ball.line.off        = off stump
+ball.line.leg        = leg stump

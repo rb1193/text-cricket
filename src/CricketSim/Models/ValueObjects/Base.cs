@@ -10,10 +10,10 @@ namespace Models.ValueObjects
 
         protected ITextUtils _t;
 
-        public Base (ITextUtils t, int i)
+        public Base (ITextUtils t, int value)
         {
             _t = t;
-            Value = i;
+            Value = value;
         }
     }
 }

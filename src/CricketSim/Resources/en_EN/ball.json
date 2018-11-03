@@ -1,5 +1,8 @@
 {
     "ball.line.outsideOff" : "outside off stump",
     "ball.line.off" : "on off stump",
-    "ball.line.leg" : "on leg stump"
+    "ball.line.leg" : "on leg stump",
+    "ball.length.short" : "a short length",
+    "ball.length.good" : "a good length",
+    "ball.length.full" : "a full length"
 }

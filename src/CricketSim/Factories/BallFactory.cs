@@ -6,7 +6,7 @@ using Models.ValueObjects;
 
 namespace Factories
 {
-    public class BallFactory
+    public class BallFactory : IBallFactory
     {
         private IRandomNumberGenerator _r;
 
@@ -17,7 +17,7 @@ namespace Factories
             _t = t;
         }
 
-        public Ball GetBall()
+        public Ball MakeBall()
         {
             var length = new Length(_t, _r.Next(1, 4));
             var line = new Line(_t, _r.Next(1, 4));

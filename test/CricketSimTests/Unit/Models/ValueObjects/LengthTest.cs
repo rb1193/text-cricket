@@ -10,27 +10,18 @@ namespace CricketSimTests
     public class Length_ToStringShould
     {        
         [Fact]
-        public void ReturnShort_GivenValue1()
+        public void ReturnAString_GivenValueBetweenOneAndThree()
         {
             var _t = new Mock<ITextUtils>();
+            _t.Setup(TextUtils => TextUtils._T("ball.length.short")).Returns("foo");
+            _t.Setup(TextUtils => TextUtils._T("ball.length.good")).Returns("bar");
+            _t.Setup(TextUtils => TextUtils._T("ball.length.full")).Returns("baz");
             var length = new Length(_t.Object, 1);
-            Assert.True(length.ToString() == "short length");
-        }
-
-        [Fact]
-        public void ReturnGood_GivenValue2()
-        {
-            var _t = new Mock<ITextUtils>();
-            var length = new Length(_t.Object, 2);
-            Assert.True(length.ToString() == "good length");
-        }
-
-        [Fact]
-        public void ReturnFull_GivenValue3()
-        {
-            var _t = new Mock<ITextUtils>();
-            var length = new Length(_t.Object, 3);
-            Assert.True(length.ToString() == "full length");
+            Assert.True(length.ToString() == "foo");
+            var length2 = new Length(_t.Object, 2);
+            Assert.True(length2.ToString() == "bar");
+            var length3 = new Length(_t.Object, 3);
+            Assert.True(length3.ToString() == "baz");
         }
 
         [Fact]

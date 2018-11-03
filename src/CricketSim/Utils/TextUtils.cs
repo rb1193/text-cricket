@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Services;
 
 namespace Utils
@@ -11,10 +12,20 @@ namespace Utils
         {
             _rh = rh;
         }
-        
-        public string _T(string key, object[] replace = null)
+
+        public string _T(string key)
         {
-            return String.Format(_rh.Get(key), replace);
+            return _rh.Get(key);
+        }
+        
+        public string _TT(string key, List<string> replacements)
+        {
+            string text = _rh.Get(key);
+            foreach (var item in replacements)
+            {
+                text = String.Format(text, item);
+            }
+            return text;
         }
     }
 }

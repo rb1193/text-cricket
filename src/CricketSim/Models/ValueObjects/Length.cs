@@ -7,7 +7,7 @@ namespace Models.ValueObjects
 {
     public class Length : Base
     {
-        public Length(ITextUtils t, int i):base(t, i) {}
+        public Length(ITextUtils t, int value):base(t, value) {}
 
         public override string ToString() {
             switch (Value)
@@ -19,7 +19,9 @@ namespace Models.ValueObjects
                 case 3:
                     return _t._T("ball.length.full");
                 default:
-                    string error = _t._T("error.value_not_found", new object[Value]);
+                    var errorValues = new List<string>();
+                    errorValues.Add(Value.ToString());
+                    string error = _t._TT("error.value_not_found", errorValues);
                     throw new ValueNotFoundException(error);
             }
         }

@@ -8,11 +8,11 @@ using Moq;
 
 namespace CricketSimTests
 {
-    public class BallFactory_GetBallShould
+    public class BallFactory_MakeBallShould
     {
         private readonly BallFactory _factory;
 
-        public BallFactory_GetBallShould()
+        public BallFactory_MakeBallShould()
         {
             var t = new Mock<ITextUtils>();
             _factory = new BallFactory(new RandomNumberGenerator(), t.Object);
@@ -21,7 +21,7 @@ namespace CricketSimTests
         [Fact]
         public void ReturnBall()
         {
-            var ball = _factory.GetBall();
+            var ball = _factory.MakeBall();
             Assert.IsType<Ball>(ball);
         }
     }

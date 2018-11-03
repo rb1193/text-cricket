@@ -1,31 +1,31 @@
 using System;
 using System.IO;
-using Newtonsoft.Json;
 using Models.Entities;
 using Factories;
 using Services;
 
-namespace Controllers
+namespace Commands
 {
-    public class BallController
+    public class StartBall
     {
-        private BallFactory _factory;
+        private IBallFactory _factory;
 
-        private ConsoleHandler _console;
+        private IConsoleHandler _console;
 
-        public BallController(
-            BallFactory factory, ConsoleHandler console
+        public StartBall(
+            IBallFactory factory,
+            IConsoleHandler console
         ) {
             _factory = factory;
             _console = console;
         }
 
-        public void Play()
+        public void Execute()
         {
-            var ball = _factory.GetBall();
+            Ball ball = _factory.MakeBall();
 
             _console.Write(ball.ToString());
-            var key = _console.Read();
+            ConsoleKeyInfo key = _console.Read();
             if (key.KeyChar == ' ') 
             {
                 _console.Write("Smash");

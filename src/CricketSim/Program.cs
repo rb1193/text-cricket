@@ -3,9 +3,10 @@ using System.IO;
 using System.Resources;
 using SimpleInjector;
 using Newtonsoft.Json;
-using Controllers;
+using Commands;
 using Factories;
 using Services;
+using Utils;
 
 namespace CricketSim
 {
@@ -16,13 +17,16 @@ namespace CricketSim
         static Program() {
             container = new Container();
 
+            container.Register<IConfigManager, ConfigManager>(Lifestyle.Singleton);
             container.Register<IConsoleHandler, ConsoleHandler>(Lifestyle.Singleton);
             container.Register<IFileHandler, FileHandler>(Lifestyle.Singleton);
             container.Register<JsonSerializer>(Lifestyle.Singleton);
             container.Register<IResourceHandler, ResourceHandler>(Lifestyle.Singleton);
             container.Register<IRandomNumberGenerator, RandomNumberGenerator>(Lifestyle.Singleton);
-            container.Register<BallFactory>(Lifestyle.Singleton);
-            container.Register<BallController>(Lifestyle.Singleton);
+            container.Register<ITextUtils, TextUtils>(Lifestyle.Singleton);
+            container.Register<IBallFactory, BallFactory>(Lifestyle.Singleton);
+            container.Register<Setup>(Lifestyle.Transient);
+            container.Register<StartBall>(Lifestyle.Transient);
 
             container.Verify();
         }
@@ -30,8 +34,11 @@ namespace CricketSim
 
         static void Main(string[] args)
         {
-            var controller = container.GetInstance<BallController>();
-            controller.Play();
+            Setup setup = container.GetInstance<Setup>();
+            setup.Execute();
+
+            StartBall startBall = container.GetInstance<StartBall>();
+            startBall.Execute();
         }
     }
 }

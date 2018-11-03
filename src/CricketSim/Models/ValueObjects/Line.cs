@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Exceptions;
 using Utils;
 
@@ -18,7 +19,9 @@ namespace Models.ValueObjects
                 case 3:
                     return _t._T("ball.line.leg");
                 default:
-                    string error = _t._T("error.value_not_found", new object[Value]);
+                    var errorValues = new List<string>();
+                    errorValues.Add(Value.ToString());
+                    string error = _t._TT("error.value_not_found", errorValues);
                     throw new ValueNotFoundException(error);
             }
         }
